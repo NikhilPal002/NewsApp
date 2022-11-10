@@ -2,16 +2,18 @@ import { getByTitle } from '@testing-library/react'
 import React, { Component } from 'react'
 
 export class NewsItem extends Component {
+
+
     render() {
-        let {title, description} = this.props;
+        let {title, description, imageUrl, newsUrl} = this.props;
         return (
-            <div>
+            <div className="my-3">
                 <div className="card" style={{width: "18rem"}}>
-                    <img src="https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/FDF6/production/_127541056_mitchell.jpg" className="card-img-top" alt="..."/>
+                    <img src={imageUrl} className="card-img-top" alt="..."/>
                         <div className="card-body">
-                            <h5 className="card-title">{title}</h5>
-                            <p className="card-text">{description}</p>
-                            <a href="/newsDetail" className="btn btn-primary">Go somewhere</a>
+                            <h5 className="card-title">{title}...</h5>
+                            <p className="card-text">{description}...</p>
+                            <a rel="noreferrer" href={newsUrl} target="_blank" className="btn btn-sm btn-dark">Read More</a>
                         </div>
                 </div>
             </div>
