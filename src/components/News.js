@@ -34,15 +34,19 @@ export class News extends Component {
     }
 
     async updateNews(pageNo) {
+        this.props.setProgress(5);
         const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=fd94ca0ca1824e56862a6a657973d54f&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         this.setState({ loading: true });
         let data = await fetch(url);
+        this.props.setProgress(30);
         let parsedData = await data.json()
+        this.props.setProgress(60);
         this.setState({
             articles: parsedData.articles,
             totalResults: parsedData.totalResults,
             loading: false,
         })
+        this.props.setProgress(100);
     }
 
 
@@ -50,16 +54,6 @@ export class News extends Component {
         this.updateNews();
     }
 
-    // handlePrevClick = async () => {
-    //     this.setState({ page: this.state.page - 1 })
-    //     this.updateNews();
-    // }
-
-    // handleNextClick = async () => {
-    //     this.setState({ page: this.state.page + 1 })
-    //     this.updateNews();
-
-    // }
     fetchMoreData = async () => {
         this.setState({ page: this.state.page + 1 })
         // this.updateNews();
@@ -97,10 +91,6 @@ export class News extends Component {
                     </div>
                 </InfiniteScroll>
 
-                {/* <div className="container d-flex justify-content-between">
-                    <button disabled={this.state.page <= 1} type="button" className="btn btn-dark" onClick={this.handlePrevClick}>&larr; Previous</button>
-                    <button disabled={this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize)} type="button" className="btn btn-dark" onClick={this.handleNextClick}>Next &rarr;</button>
-                </div> */}
             </>
         )
     }
