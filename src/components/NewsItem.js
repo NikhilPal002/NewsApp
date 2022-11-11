@@ -8,7 +8,7 @@ export class NewsItem extends Component {
         return (
             <div className="my-3">
                 <div className="card">
-                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-danger" style={{left:'90%',zIndex:'1'}} > {source}
+                    <span className="position-absolute top-0 translate-middle badge rounded-pill bg-danger" style={{left:'85%',zIndex:'1'}} > {source}
                     </span>
                     <img src={!imageUrl ? "https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" : imageUrl} className="card-img-top" alt="..." />
                     <div className="card-body">
