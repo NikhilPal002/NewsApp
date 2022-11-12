@@ -35,7 +35,7 @@ export class News extends Component {
 
     async updateNews(pageNo) {
         this.props.setProgress(5);
-        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=fd94ca0ca1824e56862a6a657973d54f&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         this.setState({ loading: true });
         let data = await fetch(url);
         this.props.setProgress(30);
@@ -56,14 +56,14 @@ export class News extends Component {
 
     fetchMoreData = async () => {
         this.setState({ page: this.state.page + 1 })
-        // this.updateNews();
-        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=fd94ca0ca1824e56862a6a657973d54f&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        // this.updateNews();  
+        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         let data = await fetch(url);
         let parsedData = await data.json()
         this.setState({
             articles: this.state.articles.concat(parsedData.articles),
             totalResults: parsedData.totalResults
-            
+
         })
     };
 
@@ -71,7 +71,7 @@ export class News extends Component {
         return (
             <>
                 <h2 className='text-center' style={{ margin: '35px 0px' }} >NewsMokey - Top {this.capitalizeFirstLetter(this.props.category)} Headlines </h2>
-                {this.state.loading && <Spinner/>}
+                {this.state.loading && <Spinner />}
                 <InfiniteScroll
                     dataLength={this.state.articles.length}
                     next={this.fetchMoreData}
